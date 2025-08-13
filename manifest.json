@@ -1,0 +1,41 @@
+{
+    "name": "work1",
+    "description": "Помощь",
+    "version": "1.0",
+    "manifest_version": 3,
+    "icons": {},
+    "action": {
+        "default_popup":"popup.html"
+    },
+    "content_scripts": [
+    {
+      "matches": [ 
+        "https://www.google.com/",
+        "http://10.224.18.12/",
+        "http://10.224.18.12/*",
+        "https://ya.ru/",
+        "https://b24.avtodor-tr.ru/",
+        "https://b24.avtodor-tr.ru/*",
+        "https://b24.avtodor-tr.ru/forms/fos/",
+        "https://b24.avtodor-tr.ru/crm/lead/kanban/",
+		"http://localhost:8080/*",
+		"http://localhost/*"
+    ],
+    "js": [ "LS.js", "file.js", "sale.js", "GRN.js","t1.js" ]
+    },
+    {
+    "matches": ["https://b24.avtodor-tr.ru/services/learning/*"],
+    "js": ["t2.js"],
+    "run_at": "document_idle"
+  }
+  ],
+  "host_permissions": ["*://*/*"],
+    "permissions": [
+        "webNavigation", 
+        "tabs", 
+        "activeTab",
+        "scripting",
+        "notifications"
+        ],
+    "background":{}
+}
