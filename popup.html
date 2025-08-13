@@ -1,24 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>work1</title>
-        <meta charset="utf-8">
-        
+<head>
+    <title>work1</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f0f5;
+            margin: 0;
+            padding: 2px;
+            min-width: 170px; /* меньше ширины для компактного popup */
+        }
 
-    </head>
-    <body>
-	<div>
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px; /* чуть меньше отступы для компактности */
+        }
+
+        button {
+            padding: 8px 20px; /* меньше ширина/высота */
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%; /* кнопки будут растягиваться на контейнер */
+        }
+
+        button:hover {
+            filter: brightness(0.9);
+        }
+
+        /* Разные цвета для кнопок */
+        #grabBtn1 { background-color: #4CAF50; }   /* зеленая */
+        #grabBtn999 { background-color: #2196F3; } /* синяя */
+        #grabBtn2 { background-color: #2196F3; }   /* оранжевая */
+        #grabBtn3 { background-color: #9C27B0; }   /* фиолетовая */
+        #grabBtn4 { background-color: #F44336; }   /* красная */
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
         <button id="grabBtn1" style="display: none">ТЕСТ-------------</button>
         <button id="grabBtn999" style="display: none">ТЕСТ-------------</button>
         <button id="grabBtn2">Лид пополнение ЛС</button>
         <button id="grabBtn4">Лид оплата по ГРН</button>
-		<button id="grabBtn3">Сделка продажа в црм</button>
-		
-        <script src="LS.js"></script>
-		<script src="file.js"></script>
-		<script src="sale.js"></script>
-        <script src="GRN.js"></script>
-        <script src="t1.js"></script>
-	</div>	
-    </body>
+        <button id="grabBtn3">Сделка продажа в ЦРМ</button>
+    </div>
+
+    <script src="LS.js"></script>
+    <script src="file.js"></script>
+    <script src="sale.js"></script>
+    <script src="GRN.js"></script>
+    <script src="t1.js"></script>
+</body>
 </html>
