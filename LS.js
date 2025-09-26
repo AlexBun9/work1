@@ -124,7 +124,9 @@ function fillForm(lsMes){
     numLs[12].dispatchEvent(new Event("click", { bubbles: true })); //событие клик по списку
     setTimeout(() => {
     var numLs2 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item"));
-    numLs2[16].click();
+    let target = numLs2.find(el => el.innerText.trim() === "Пополнение лицевого счета");
+	target.click();
+    //numLs2[16].click();
     }, 500);
 
     setTimeout(() => {
@@ -133,7 +135,9 @@ function fillForm(lsMes){
 
     setTimeout(() => {
     var numLs3 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item-title"));
-    numLs3[0].click();
+    let target = numLs3.find(el => el.innerText.trim() === "Пополнение в ЦПиО");
+	target.click();
+    //numLs3[0].click();
     }, 1000);
 	
     setTimeout(() => {

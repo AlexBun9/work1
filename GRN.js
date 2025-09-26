@@ -112,7 +112,9 @@ function fillFormGRN(grn1){
     
     setTimeout(() => {
     var numLs2 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item"));
-    numLs2[14].click();
+    let target = numLs2.find(el => el.innerText.trim() === "Оплата проезда по ГРН");
+	target.click();
+    //numLs2[14].click();
     }, 500);
     
     setTimeout(() => {
@@ -121,7 +123,9 @@ function fillFormGRN(grn1){
     
     setTimeout(() => {
     var numLs3 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item-title"));
-    numLs3[1].click();
+    let target = numLs3.find(el => el.innerText.trim() === "Оплата в ЦПиО");
+	target.click();
+    //numLs3[1].click();
     }, 1000);
 	
     setTimeout(() => {
