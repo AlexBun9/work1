@@ -112,7 +112,7 @@ function fillFormGRN(grn1){
     
     setTimeout(() => {
     var numLs2 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item"));
-    numLs2[13].click();
+    numLs2[14].click();
     }, 500);
     
     setTimeout(() => {

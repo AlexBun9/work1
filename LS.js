@@ -124,7 +124,7 @@ function fillForm(lsMes){
     numLs[12].dispatchEvent(new Event("click", { bubbles: true })); //событие клик по списку
     setTimeout(() => {
     var numLs2 = Array.from(iFrm.getElementsByClassName("b24-form-control-list-selector-item"));
-    numLs2[15].click();
+    numLs2[16].click();
     }, 500);
 
     setTimeout(() => {
