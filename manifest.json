@@ -21,7 +21,7 @@
 		"http://localhost:8080/*",
 		"http://localhost/*"
     ],
-    "js": [ "LS.js", "sale.js", "sale2.js", "GRN.js","ANON_INTER.js","PL.js" ]
+    "js": [ "LS.js", "sale.js", "sale2.js", "GRN.js","ANON_INTER.js","PL.js", "PERSONAL.js" ]
     },
     {
     "matches": ["https://b24.avtodor-tr.ru/services/learning/*"],
