@@ -30,7 +30,12 @@ function takePL() {
   	//получение грн
     const link = document.querySelector('a[href^="/pp/contracts/"]');
 	let string1 = '';
-
+	const currentUrl = window.location.href;
+	
+	if (currentUrl.includes("10.224.18.12")) {
+        page1PL = "http://10.224.18.12/loyalty/contracts/";
+        
+    }
 	if (link) {
 		// Извлекаем число из конца URL
 		string1 = link.getAttribute('href').split('/').pop();
