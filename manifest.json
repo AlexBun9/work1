@@ -1,15 +1,22 @@
 {
-    "name": "work1",
-    "description": "help",
-    "version": "1.0",
-    "manifest_version": 3,
-    "icons": {},
-    "action": {
-        "default_popup":"popup.html"
-    },
-    "content_scripts": [
+  "name": "work1",
+  "description": "Помощь",
+  "version": "1.0",
+  "manifest_version": 3,
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "action": {
+    "default_popup": "popup.html"
+  },
+  
+  "content_scripts": [
     {
-      "matches": [ 
+      "matches": [
         "https://www.google.com/",
         "http://10.224.18.12/",
         "http://10.224.18.12/*",
@@ -18,24 +25,39 @@
         "https://b24.avtodor-tr.ru/*",
         "https://b24.avtodor-tr.ru/forms/fos/",
         "https://b24.avtodor-tr.ru/crm/lead/kanban/",
-		"http://localhost:8080/*",
-		"http://localhost/*"
-    ],
-    "js": [ "LS.js", "sale.js", "sale2.js", "GRN.js","ANON_INTER.js","PL.js", "PERSONAL.js" ]
+        "http://localhost:8080/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "LS.js",
+        "sale.js",
+        "sale2.js",
+        "GRN.js",
+        "ANON_INTER.js",
+        "PL.js",
+        "PERSONAL.js"
+      ]
     },
     {
-    "matches": ["https://b24.avtodor-tr.ru/services/learning/*"],
-    "js": ["t2.js"],
-    "run_at": "document_idle"
-  }
+      "matches": ["https://b24.avtodor-tr.ru/services/learning/*"],
+      "js": ["t2.js"],
+      "run_at": "document_idle"
+    }
   ],
-  "host_permissions": ["*://*/*"],
-    "permissions": [
-        "webNavigation", 
-        "tabs", 
-        "activeTab",
-        "scripting",
-        "notifications"
-        ],
-    "background":{}
+  
+  "host_permissions": [
+    "*://*/*"
+  ],
+  
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "notifications"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  }
 }
