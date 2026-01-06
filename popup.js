@@ -1,41 +1,36 @@
+// ==== Р¤РђР™Р› popup.js ====
 document.addEventListener('DOMContentLoaded', function() {
   const grabBtn69 = document.getElementById('grabBtn69');
   
   if (!grabBtn69) {
-    console.error('Кнопка grabBtn69 не найдена!');
+    console.error('РљРЅРѕРїРєР° grabBtn69 РЅРµ РЅР°Р№РґРµРЅР°!');
     return;
   }
   
   grabBtn69.addEventListener('click', function() {
+    // РњРµРЅСЏРµРј С‚РµРєСЃС‚ РєРЅРѕРїРєРё
     grabBtn69.disabled = true;
     const originalText = grabBtn69.textContent;
-    grabBtn69.textContent = 'Готовлю обновление...';
+    grabBtn69.textContent = 'Р“РѕС‚РѕРІР»СЋ РѕР±РЅРѕРІР»РµРЅРёРµ...';
     
-    // VBScript с правильной кодировкой
-    const vbsScript = 
-`On Error Resume Next
-
-Set objShell = CreateObject("WScript.Shell")
-Set objHTTP = CreateObject("MSXML2.ServerXMLHTTP.6.0")
+    // VBScript РґР»СЏ Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»РѕРІ
+    const vbsScript = `Set objShell = CreateObject("WScript.Shell")
+Set objHTTP = CreateObject("MSXML2.ServerXMLHTTP")
 
 files = Array("manifest.json", "background.js", "popup.html", "popup.js", "content.js")
 baseUrl = "https://raw.githubusercontent.com/AlexBun9/work1/main/"
-destDir = "C:\\work1"
+destDir = "C:\\\\work1"
 
-' Создаем папку если нет
+' РЎРѕР·РґР°РµРј РїР°РїРєСѓ РµСЃР»Рё РЅРµС‚
 Set fso = CreateObject("Scripting.FileSystemObject")
 If Not fso.FolderExists(destDir) Then
   fso.CreateFolder(destDir)
 End If
 
 successCount = 0
-errorDetails = ""
-
-For Each fileName In files
+For Each file In files
   On Error Resume Next
-  Err.Clear
-  
-  objHTTP.open "GET", baseUrl & fileName, False
+  objHTTP.open "GET", baseUrl & file, False
   objHTTP.send
   
   If objHTTP.Status = 200 Then
@@ -43,114 +38,56 @@ For Each fileName In files
     objStream.Open
     objStream.Type = 1
     objStream.Write objHTTP.ResponseBody
-    objStream.SaveToFile destDir & "\\" & fileName, 2
+    objStream.SaveToFile destDir & "\\\\" & file, 2
     objStream.Close
     successCount = successCount + 1
-    WScript.Echo "OK: " & fileName
-  Else
-    errorDetails = errorDetails & "FAIL: " & fileName & " (HTTP " & objHTTP.Status & ")" & vbCrLf
   End If
 Next
 
-' Показываем результат
 If successCount > 0 Then
-  resultMsg = "Обновлено файлов: " & successCount & " из " & UBound(files) + 1 & vbCrLf & vbCrLf
-  If Len(errorDetails) > 0 Then
-    resultMsg = resultMsg & "Ошибки:" & vbCrLf & errorDetails
-  End If
-  resultMsg = resultMsg & vbCrLf & "Файлы сохранены в:" & vbCrLf & destDir & vbCrLf & vbCrLf
-  resultMsg = resultMsg & "Теперь открой chrome://extensions/ и нажми кнопку 'Обновить'"
-  
-  ' Используем командную строку для вывода с правильной кодировкой
-  objShell.Run "cmd.exe /c @echo off && chcp 1251 > nul && echo " & Chr(34) & resultMsg & Chr(34) & " && pause", 1, True
+  objShell.Run "cmd.exe /c echo Р¤Р°Р№Р»С‹ РѕР±РЅРѕРІР»РµРЅС‹! Р—Р°РїСѓСЃС‚Рё chrome://extensions/ Рё РЅР°Р¶РјРё 'РћР±РЅРѕРІРёС‚СЊ' && pause", 1, True
 Else
-  objShell.Popup "Не удалось скачать файлы!" & vbCrLf & errorDetails, 0, "Ошибка", 16
-End If
-
-Set objHTTP = Nothing
-Set objShell = Nothing
-Set fso = Nothing`;
+  MsgBox "РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»РѕРІ!", vbCritical
+End If`;
     
-    // Создаем файл с кодировкой Windows-1251
+    // РЎРѕР·РґР°РµРј Рё СЃРєР°С‡РёРІР°РµРј VBScript С„Р°Р№Р»
     try {
-      // Конвертируем текст в нужную кодировку
-      const encoder = new TextEncoder('windows-1251');
-      const encoded = encoder.encode(vbsScript);
-      
-      const blob = new Blob([encoded], { type: 'text/vbscript; charset=windows-1251' });
+      const blob = new Blob([vbsScript], { type: 'text/vbscript' });
       const url = URL.createObjectURL(blob);
-      
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'update.vbs';
+      link.download = 'update_extension.vbs';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(url);
       
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-      }, 1000);
-      
-      // Показываем инструкцию в нормальной кодировке
-      grabBtn69.textContent = 'Скрипт скачан!';
+      // РџРѕРєР°Р·С‹РІР°РµРј РёРЅСЃС‚СЂСѓРєС†РёСЋ
+      grabBtn69.textContent = 'РЎРєСЂРёРїС‚ СЃРєР°С‡Р°РЅ!';
       
       setTimeout(function() {
-        const instruction = 
-`?? ИНСТРУКЦИЯ:
-
-1. Файл 'update.vbs' скачался в папку 'Загрузки'
-2. Найди его и запусти двойным кликом
-3. Появится окно CMD с результатом
-4. Нажми любую клавишу чтобы закрыть
-5. Открой chrome://extensions/
-6. Нажми 'Обновить' ?? возле расширения
-
-?? Файлы будут в: C:\\work1`;
-
-        alert(instruction);
+        alert('рџ“Ґ РРЅСЃС‚СЂСѓРєС†РёСЏ РїРѕ РѕР±РЅРѕРІР»РµРЅРёСЋ:\n\n' +
+              '1. Р¤Р°Р№Р» "update_extension.vbs" СЃРєР°С‡Р°Р»СЃСЏ РІ РїР°РїРєСѓ "Р—Р°РіСЂСѓР·РєРё"\n' +
+              '2. РџРµСЂРµР№РґРё РІ Р—Р°РіСЂСѓР·РєРё Рё Р·Р°РїСѓСЃС‚Рё РµРіРѕ РґРІРѕР№РЅС‹Рј РєР»РёРєРѕРј\n' +
+              '3. Р•СЃР»Рё РїРѕСЏРІРёС‚СЃСЏ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ - РЅР°Р¶РјРё "Р Р°Р·СЂРµС€РёС‚СЊ"\n' +
+              '4. РџРѕСЏРІРёС‚СЃСЏ С‡РµСЂРЅРѕРµ РѕРєРЅРѕ - РґРѕР¶РґРёСЃСЊ Р·Р°РІРµСЂС€РµРЅРёСЏ\n' +
+              '5. РћС‚РєСЂРѕР№ chrome://extensions/\n' +
+              '6. РќР°Р¶РјРё "РћР±РЅРѕРІРёС‚СЊ" рџ”„ РІРѕР·Р»Рµ СЂР°СЃС€РёСЂРµРЅРёСЏ\n\n' +
+              'вњ… Р¤Р°Р№Р»С‹ Р±СѓРґСѓС‚ РѕР±РЅРѕРІР»РµРЅС‹ РІ C:\\work1');
         
+        // Р’РѕР·РІСЂР°С‰Р°РµРј РєРЅРѕРїРєСѓ РІ РёСЃС…РѕРґРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
         grabBtn69.textContent = originalText;
         grabBtn69.disabled = false;
       }, 1000);
       
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error('РћС€РёР±РєР°:', error);
+      grabBtn69.textContent = 'РћС€РёР±РєР°!';
       
-      // Резервный вариант без кодировки
-      try {
-        const blob = new Blob([vbsScript], { type: 'text/vbscript' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'update_utf8.vbs';
-        link.textContent = 'Скачать скрипт (альтернатива)';
-        link.style.display = 'block';
-        link.style.padding = '10px';
-        link.style.background = '#4CAF50';
-        link.style.color = 'white';
-        link.style.textDecoration = 'none';
-        link.style.textAlign = 'center';
-        
-        // Заменяем кнопку ссылкой
-        grabBtn69.parentNode.replaceChild(link, grabBtn69);
-        
-        // Показываем инструкцию
-        const statusDiv = document.getElementById('status') || document.createElement('div');
-        statusDiv.innerHTML = `
-          <p>Если скрипт не запускается:</p>
-          <ol>
-            <li>Сохрани файл как ANSI (Notepad++ > Кодировка > ANSI)</li>
-            <li>Или переименуй в .txt, открой в Блокноте</li>
-            <li>Сохрани как .vbs с кодировкой ANSI</li>
-            <li>Запусти файл</li>
-          </ol>
-        `;
-        
-      } catch (e) {
-        alert('Критическая ошибка: ' + e.message);
+      setTimeout(function() {
         grabBtn69.textContent = originalText;
         grabBtn69.disabled = false;
-      }
+      }, 3000);
     }
   });
 });
