@@ -42,6 +42,12 @@
       "matches": ["https://b24.avtodor-tr.ru/services/learning/*"],
       "js": ["t2.js"],
       "run_at": "document_idle"
+    },
+	{
+      "matches": ["https://b24.avtodor-tr.ru/forms/fos/*"],
+      "js": ["closepage.js"],
+      "run_at": "document_end",
+	  "all_frames": true
     }
   ],
   
@@ -54,7 +60,8 @@
     "tabs",
     "activeTab",
     "scripting",
-    "notifications"
+    "notifications",
+	"background"
   ],
   
   "background": {
